@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 __author__ = 'alicia'
+
 import pygame
 from random import randint
 
@@ -19,7 +21,7 @@ class Objects(pygame.sprite.Sprite):
         self. pos = (x, y)
 
 class Sprite(pygame.sprite.Sprite):
-    " Base class for Sprite "
+    """ La classe de base pour les sprites """
     def __init__(self, x = 0, y = 0):
         "Initialisation"
         pygame.sprite.Sprite.__init__(self)
@@ -46,7 +48,7 @@ class Sprite(pygame.sprite.Sprite):
         self.rect.center = (self.x,self.y)
 
 
-    # Sprite image initialization
+    # Initualisation des images des sprites
     def init_image(self, imgPath):
         self.image = pygame.image.load(imgPath).convert()
         self.image.set_colorkey(self.image.get_at((0,0)), RLEACCEL)
@@ -66,7 +68,7 @@ class Monster(Sprite):
 
     def draw(self):
         if self.perso.life <= 1:
-            # create monster
+            # crée  un ennemi
             if self.monster == None:
                 case = randint(5 ,1000)
                 if case > 0:
@@ -75,11 +77,11 @@ class Monster(Sprite):
                     self.monster.move()
             else:
                 self.monster.move()
-                # touch monster
+                # toucher l'ennemi
                 if self.perso.rect.colliderect(self.monster.rect):
                     self.perso.life = self.perso.life - 1
 
-class Box:
+class Box(Sprite):
     def __init__(self):
         self.img = pygame.image.load("brick1.png").convert()
         self.obj_pos = (300, 600)

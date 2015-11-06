@@ -5,10 +5,11 @@ import pygame
 import perso
 import cevent
 import plate
-import camera
+import camera2
 import score
 import objects
 from random import randint
+import level
 
 
 class App(cevent.Events):
@@ -17,7 +18,7 @@ class App(cevent.Events):
     def __init__(self):
         self._running = True
         self._display_surf = None
-        self.size = self.weight, self.height = 1024, 683
+        self.size = self.width, self.height = 1024, 683
     def on_init(self):
         """Appel pygame.init() qui initialize tout les modules PyGame"""
         pygame.init()
@@ -28,6 +29,9 @@ class App(cevent.Events):
         clock = pygame.time.Clock()
         self._running = True
         self._image_background = pygame.image.load("resources/level1back.png").convert()
+        # Mets les objects
+        self.currentLevel = level.Level("level_1.lvl")
+        self.cameraObj = camera2.Camera(perso.rect, self.width, self.height)
  
     def on_exit(self):
         self._running = False #La fonction _running est mise à False et donc coupe la boucle de jeu
@@ -42,8 +46,8 @@ class App(cevent.Events):
         ##self._display_surf.blit(PERSO._image_player, (x,y))
         self._display_surf.blit(plateform.image, plateform.rect)
         self._display_surf.blit(perso.image, perso.rect, perso.area)
-        for i in range(0, 10):
-            self._display_surf.blit(plateform.image, (randint(200,1000), randint(500,600)))
+        ##for i in range(0, 10):
+            ##self._display_surf.blit(plateform.image, (randint(200,1000), randint(500,600)))
 
         self._display_surf.blit(score.text,(0,0))
         pygame.display.flip()
@@ -70,6 +74,6 @@ class App(cevent.Events):
 
 plateform = plate.World()
 perso = perso.Perso((250, 355), plateform)
-camera = camera.Camera()
+#camera = camera2.Camera()
 score = score.Score()
 obj = objects.Box

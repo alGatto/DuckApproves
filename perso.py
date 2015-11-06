@@ -59,7 +59,7 @@ class Perso(pygame.sprite.Sprite):
         self.jump_frame = 0
         self.jump_stop_frame = 13
         self.jump_forward = 0
-        self.jump_air_power = 3 #sideways power in jump
+        self.jump_air_power = 3
         self.jump_speed = 5
  
         self.fall_speed = 5
@@ -72,6 +72,7 @@ class Perso(pygame.sprite.Sprite):
  
 
     def handle_event(self, event):
+        """Prends les évenements comme les touches préssées"""
         if self.state != self.jumping_state:
             self.check_if_falling()
  
@@ -85,6 +86,7 @@ class Perso(pygame.sprite.Sprite):
         self.area = pygame.rect.Rect(self.actions[self.action])
  
     def check_if_falling(self):
+        """Vérifie si le perso ne touche pas une plateform et donc tombe"""
         for solid in self.world.solids:
             if (self.rect.x >= solid[0] and self.rect.x <= solid[1] and 
                 solid[2] > (self.rect.y - self.fall_tolerance) and solid[2] < (self.rect.y + self.fall_tolerance)): 

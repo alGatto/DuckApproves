@@ -7,7 +7,7 @@ pygame.font.init()
 
 class Score():
     """La classe qui affiche le score"""
-    def __init__(self, count = 15):
+    def __init__(self, count = 0):
         """on initialise la classe"""
         self.font = pygame.font.SysFont(None, 25)
         """on definit un font pour l'affichage"""

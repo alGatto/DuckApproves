@@ -4,6 +4,7 @@ __author__ = 'alicia'
 import pygame
 
 class World(object):
+    """La classe de la plateforme du niveau"""
     def __init__(self):
         pygame.display.init()
         width = 1024
